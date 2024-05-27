@@ -1,0 +1,9 @@
+{
+  "email": "catana_bogdan28@yahoo.com",
+  "password": "parolaPuternica5"
+}
+
+{
+  "email": "marcel_avs@yahoo.com",
+  "password": "geluMarcelu"
+}
