@@ -21,12 +21,8 @@ public class JwtUtils {
     @Value("${bezkoder.app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
-    /**
-     * You should extract this constants in a separated class named 'Constants' in 'utils' package , as public static final
-     */
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-    // Define the length of the token
     private static final int TOKEN_LENGTH = 32;
 
     public String generateJwtToken(UserDetailsImpl userPrincipal) {
@@ -43,7 +39,6 @@ public class JwtUtils {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
 
-    // generate random token for the reset password
     public static String generateRandomToken() {
         SecureRandom random = new SecureRandom();
         StringBuilder token = new StringBuilder(TOKEN_LENGTH);
@@ -75,5 +70,4 @@ public class JwtUtils {
 
         return false;
     }
-
 }

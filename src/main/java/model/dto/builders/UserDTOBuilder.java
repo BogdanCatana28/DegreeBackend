@@ -11,9 +11,6 @@ public class UserDTOBuilder {
     private UserDTOBuilder() {
     }
 
-    /**
-     * Simply name 'toDTO'
-     */
     public static UserDTO toUserDTO(User user) {
         return UserDTO.builder()
                 .lastName(user.getLastName())
@@ -26,9 +23,6 @@ public class UserDTOBuilder {
                 .build();
     }
 
-    /**
-     * Simply name 'toEntity'
-     */
     public static User fromUserDTO(UserDTO userDTO) {
         return User.builder()
                 .firstName(userDTO.getFirstName())

@@ -16,9 +16,7 @@ import java.util.function.Supplier;
 
 @Service
 public class MedicServiceImpl implements MedicService {
-    /**
-     * You could also declare these autowired fields as 'final'
-     */
+
     @Autowired
     private MedicRepository medicRepository;
     @Autowired
@@ -26,9 +24,7 @@ public class MedicServiceImpl implements MedicService {
 
 
     public Medic getMedicById(Integer id) throws RepositoryException {
-        /**
-         * You should extract this message as a constant in a separated class named 'Constants' in 'utils' package , as public static final
-         */
+
         Supplier<RepositoryException> e = () -> new RepositoryException("Medic with id " + id + " does not exist");
         return medicRepository.findById(id).orElseThrow(e);
     }
@@ -53,5 +49,4 @@ public class MedicServiceImpl implements MedicService {
 
         return medics;
     }
-
 }

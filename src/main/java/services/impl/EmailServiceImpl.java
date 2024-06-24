@@ -25,9 +25,6 @@ import java.util.Map;
 @Service
 public class EmailServiceImpl implements EmailService {
 
-    /**
-     * You could also declare these autowired fields as 'final'
-     */
     @Autowired
     private JavaMailSender javaMailSender;
 
@@ -37,10 +34,7 @@ public class EmailServiceImpl implements EmailService {
     @Value("${spring.mail.username}")
     private String sender;
 
-    /**
-     * You should extract this message as a constant in a separated class named 'Constants' in 'utils' package , as public static final
-     */
-    private final String senderName = "Fortech Clinic";
+    private final String senderName = "Neo Vet Clinic";
 
     @Value("classpath:/mail-images/logo.png")
     private Resource logo;
@@ -63,10 +57,7 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendAppointmentConfirmation(Appointment appointment) {
-        /**
-         * Extract the next 8 lines into a separated method because the S (single responisibility) principle is violated
-         * Call this method here atfter doing that
-         */
+
         Map<String, Object> templateModel = new HashMap<>();
         templateModel.put("recipientName", appointment.getOwnerFirstName() + " " + appointment.getOwnerLastName());
         templateModel.put("appointmentDate", appointment.getDateReservation());
@@ -77,9 +68,7 @@ public class EmailServiceImpl implements EmailService {
         templateModel.put("logo", logo);
 
         try {
-            /**
-             * You should extract this message as a constant in a separated class named 'Constants' in 'utils' package , as public static final
-             */
+
             sendEmailWithTemplate(appointment.getOwnerEmail(), "Appointment confirmation", templateModel, "sendAppointmentConfirmationTemplate.ftl");
         } catch (IOException | MessagingException | TemplateException e) {
             throw new RuntimeException(e);
@@ -88,9 +77,7 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendAppointmentCancellation(Appointment appointment) {
-        /**
-         * See above. You could use the same extracted method here, but with another parameters
-         */
+
         Map<String, Object> templateModel = new HashMap<>();
         templateModel.put("recipientName", appointment.getOwnerFirstName() + " " + appointment.getOwnerLastName());
         templateModel.put("appointmentDate", appointment.getDateReservation());
@@ -100,9 +87,7 @@ public class EmailServiceImpl implements EmailService {
         templateModel.put("logo", logo);
 
         try {
-            /**
-             * You should extract this message as a constant in a separated class named 'Constants' in 'utils' package , as public static final
-             */
+
             sendEmailWithTemplate(appointment.getOwnerEmail(), "Appointment cancellation", templateModel, "sendAppointmentCancellationTemplate.ftl");
         } catch (IOException | MessagingException | TemplateException e) {
             throw new RuntimeException(e);
@@ -111,9 +96,7 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendDayOffConfirmation(DayOff dayOff) {
-        /**
-         * See above. You could use the same extracted method here, but with another parameters
-         */
+
         Map<String, Object> templateModel = new HashMap<>();
         templateModel.put("recipientName", dayOff.getMedic().getFirstName() + " " + dayOff.getMedic().getLastName());
         templateModel.put("dayOffDate", dayOff.getFreeDay());
@@ -121,28 +104,21 @@ public class EmailServiceImpl implements EmailService {
         templateModel.put("logo", logo);
 
         try {
-            /**
-             * You should extract this message as a constant in a separated class named 'Constants' in 'utils' package , as public static final
-             */
+
             sendEmailWithTemplate(dayOff.getMedic().getEmail(), "Day off confirmation", templateModel, "sendDayOffConfirmationTemplate.ftl");
         } catch (IOException | MessagingException | TemplateException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     @Override
     public void sendPasswordResetLink(String email, String resetLink) {
-        /**
-         * See above. You could use the same extracted method here, but with another parameters
-         */
+
         Map<String, Object> templateModel = new HashMap<>();
-        templateModel.put("recipientName", ""); // You can customize this if needed
+        templateModel.put("recipientName", "");
         templateModel.put("resetLink", resetLink);
         templateModel.put("senderName", senderName);
-        /**
-         * You should extract this message as a constant in a separated class named 'Constants' in 'utils' package , as public static final
-         */
+
         try {
             sendEmailWithTemplate(email, "Password Reset Request", templateModel, "sendPasswordResetLinkTemplate.ftl");
         } catch (IOException | MessagingException | TemplateException e) {

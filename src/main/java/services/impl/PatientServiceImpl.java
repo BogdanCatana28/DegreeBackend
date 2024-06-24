@@ -25,9 +25,6 @@ import java.util.function.Supplier;
 @Service
 public class PatientServiceImpl implements PatientService {
 
-    /**
-     * You could also declare these autowired fields as 'final'
-     */
     @Autowired
     private PatientRepository patientRepository;
 
@@ -54,34 +51,23 @@ public class PatientServiceImpl implements PatientService {
         patientValidator.validate(patientDTO);
         patient = PatientDTOBuilder.fromPatientDTO(patientDTO);
         if (Boolean.TRUE.equals(patientDTO.getUserAlreadyRegistered())) {
-            /**
-             * Extract the next 4 lines into a separated method because the S (single responisibility) principle is violated
-             * Call this method here atfter doing that
-             */
+
             User oldUser = userService.getUserById(patient.getOwner().getId());
             patient.getOwner().setPassword(oldUser.getPassword());
             patient.getOwner().setRole(oldUser.getRole());
             userService.updateUser(patient.getOwner());
         } else {
-            /**
-             * Extract the next 3 lines into a separated method because the S (single responisibility) principle is violated
-             * Call this method here atfter doing that
-             */
+
             SignupRequest signupRequest = AuthenticationDTOBuilder.toRegisterAccountDTO(patient.getOwner());
             String generatedPassword = accountsService.generatePassword();
             signupRequest.setPassword(generatedPassword);
-            /**
-             * Extract the next 4 lines into a separated method because the S (single responisibility) principle is violated
-             * Call this method here atfter doing that
-             */
+
             User savedUser = accountsService.registerUser(signupRequest);
             patient.getOwner().setId(savedUser.getId());
             patient.getOwner().setPassword(generatedPassword);
             emailService.sendPassword(patient.getOwner());
         }
-        /**
-         * You should do the save into a try-catch block because of the errors that can appear
-         */
+
         return patientRepository.save(patient);
     }
 
@@ -100,9 +86,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Patient getPatientById(Integer id) throws RepositoryException {
-        /**
-         * You should extract this message as a constant in a separated class named 'Constants' in 'utils' package , as public static final
-         */
+
         Supplier<RepositoryException> exception = () -> new RepositoryException("Patient not found");
         return patientRepository.findById(id).orElseThrow(exception);
     }
@@ -132,5 +116,4 @@ public class PatientServiceImpl implements PatientService {
         return patientRepository.findByNameAndTypeAndBreedAndSexAndOwner_Email(
                 patientName, patientType, patientBreed, patientSex, ownerEmail);
     }
-
 }

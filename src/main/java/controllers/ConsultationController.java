@@ -20,9 +20,6 @@ import java.util.List;
 @RequestMapping("/consultations")
 public class ConsultationController {
 
-    /**
-     * You could also declare this autowired field as 'final'
-     */
     @Autowired
     private ConsultationService consultationService;
 
@@ -42,19 +39,13 @@ public class ConsultationController {
         }
     }
     @PreAuthorize("hasRole('MEDIC')")
-    /**
-     * You already have 'consultations' in url
-     */
-    @GetMapping("/consultations/by-patient/{patientId}")
+    @GetMapping("/by-patient/{patientId}")
     public ResponseEntity<List<ConsultationDTO>> getConsultationsByPatientId(@PathVariable Integer patientId) {
         List<ConsultationDTO> consultations = consultationService.getConsultationsByPatientId(patientId);
         return ResponseEntity.ok(consultations);
     }
     @PreAuthorize("hasRole('MEDIC')")
-    /**
-     * You already have 'consultations' in url
-     */
-    @GetMapping("/consultations/{consultationId}")
+    @GetMapping("/{consultationId}")
     public ResponseEntity<ConsultationDTO> getConsultation(@PathVariable Integer consultationId) {
         try {
             return ResponseEntity.ok(ConsultationDTOBuilder.toConsultationDTO(consultationService.getConsultationById(consultationId)));

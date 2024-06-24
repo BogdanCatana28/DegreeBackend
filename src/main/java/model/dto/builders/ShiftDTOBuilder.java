@@ -11,9 +11,6 @@ public class ShiftDTOBuilder {
     private ShiftDTOBuilder() {
     }
 
-    /**
-     * Simply name 'toDTO'
-     */
     public static ShiftDTO toShiftDTO(Shift shift) {
         return ShiftDTO.builder()
                 .id(shift.getId())
@@ -23,9 +20,6 @@ public class ShiftDTOBuilder {
                 .build();
     }
 
-    /**
-     * Simply name 'toEntity'
-     */
     public static Shift fromShiftDTO(ShiftDTO shiftDTO) {
         return Shift.builder()
                 .startTime(shiftDTO.getStartTime())

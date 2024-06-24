@@ -11,5 +11,4 @@ public interface ShiftRepository extends JpaRepository<Shift, Integer> {
     Iterable<Shift> getShiftsByEndTimeIsAfterAndStartTimeIsBefore(LocalDateTime startTime, LocalDateTime endTime);
 
     Iterable<Shift> getShiftsByMedicIdAndEndTimeIsAfterAndStartTimeIsBefore(Integer medicId, LocalDateTime startTime, LocalDateTime endTime);
-
 }

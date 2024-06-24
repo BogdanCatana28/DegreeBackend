@@ -8,15 +8,10 @@ import model.dto.DayOffDTO;
 import java.util.ArrayList;
 
 public class DayOffDTOBuilder {
-    /**
-     * Use @NoArgsContructor instead of this
-     */
+
     private DayOffDTOBuilder() {
     }
 
-    /**
-     * Simply name 'toDTO'
-     */
     public static DayOffDTO toDayOffDTO(DayOff dayOff) {
         return DayOffDTO.builder()
                 .id(dayOff.getId())

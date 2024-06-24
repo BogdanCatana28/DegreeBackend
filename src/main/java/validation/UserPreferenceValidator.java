@@ -19,11 +19,8 @@ public class UserPreferenceValidator {
     UserService userService;
 
     public void validate(UserPreferenceDTO userPreferenceDTO) throws ValidatorException {
-        // CUSTOMER
-        //validateCustomer(userPreferenceDTO.getCustomer());
         validateCustomerId(userPreferenceDTO.getCustomerId());
 
-        // PATIENT
         validateName(userPreferenceDTO.getName());
         validateType(String.valueOf(userPreferenceDTO.getType()));
         validateBreed(userPreferenceDTO.getBreed());
@@ -105,8 +102,6 @@ public class UserPreferenceValidator {
         }
 
     }
-
-    // PATIENT
 
     private void validateName(String name) throws ValidatorException {
         if (name == null || name.isEmpty()) {

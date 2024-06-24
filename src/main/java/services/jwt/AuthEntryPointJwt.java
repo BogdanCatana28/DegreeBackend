@@ -18,9 +18,6 @@ import java.util.Map;
 @Component
 public class AuthEntryPointJwt implements AuthenticationEntryPoint {
 
-    /**
-     * You should extract this constant in a separated class named 'Constants' in 'utils' package , as public static final
-     */
     private static final Logger logger = LoggerFactory.getLogger(AuthEntryPointJwt.class);
 
     @Override

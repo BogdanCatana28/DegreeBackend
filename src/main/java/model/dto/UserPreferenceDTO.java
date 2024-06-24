@@ -12,17 +12,14 @@ import lombok.NoArgsConstructor;
 public class UserPreferenceDTO {
     private Integer id;
 
-    // USER
     private Integer customerId;
 
-    // OWNER
     private String firstName;
     private String lastName;
     private String email;
     private String phone;
     private String address;
 
-    // PATIENT
     private String name;
     private String sex;
     private String type;

@@ -19,9 +19,7 @@ import java.io.IOException;
 
 
 public class AuthTokenFilter extends OncePerRequestFilter {
-    /**
-     * You should extract this constant in a separated class named 'Constants' in 'utils' package, as public static final
-     */
+
     private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
     @Autowired
     private JwtUtils jwtUtils;
@@ -63,6 +61,4 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
         return null;
     }
-
-
 }

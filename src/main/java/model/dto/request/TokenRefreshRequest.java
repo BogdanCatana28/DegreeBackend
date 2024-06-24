@@ -9,9 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-/**
- * It was absolutelly necessary to create a dto with only one field ?
- */
 public class TokenRefreshRequest {
     private String refreshToken;
 }

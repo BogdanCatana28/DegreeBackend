@@ -14,5 +14,4 @@ public interface MedicService {
     Iterable<Medic> getAllMedics();
 
     Iterable<Medic> getMedicsForProcedure(Integer procedureId) throws RepositoryException;
-
 }

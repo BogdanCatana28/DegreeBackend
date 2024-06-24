@@ -14,36 +14,25 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-/**
- * You have to add 'procedure' here in url and eliminate it from the below mappings
- */
-@RequestMapping
+
+@RequestMapping("/procedures")
 public class ProcedureController {
 
     @Autowired
     private ProcedureService procedureService;
 
-    /**
-     * Remove 'procedures' from url (see first comment)
-     */
-    @PostMapping("/procedures")
+    @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Procedure> addProcedure(@RequestBody Procedure procedure) {
         return ResponseEntity.ok().body(procedureService.addProcedure(procedure));
     }
 
-    /**
-     * Remove 'procedures' from url (see first comment)
-     */
-    @GetMapping("/procedures")
+    @GetMapping
     List<Procedure> showProcedures() {
         return procedureService.showProcedures();
     }
 
-    /**
-     * Remove 'procedures' from url (see first comment)
-     */
-    @GetMapping("/procedures/{id}")
+    @GetMapping("/{id}")
     ResponseEntity<Procedure> showProcedureById(@PathVariable Integer id) {
         try {
             return ResponseEntity.ok().body(procedureService.getProcedureById(id));
@@ -52,10 +41,7 @@ public class ProcedureController {
         }
     }
 
-    /**
-     * Remove 'procedures' from url (see first comment)
-     */
-    @PutMapping("/procedures/{id}")
+    @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     ResponseEntity<Procedure> updateProcedure(@RequestBody Procedure newProcedure, @PathVariable Integer id) {
         try {
@@ -65,10 +51,7 @@ public class ProcedureController {
         }
     }
 
-    /**
-     * Remove 'procedures' from url (see first comment)
-     */
-    @DeleteMapping("/procedures/{id}")
+    @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public void deleteProcedure(@PathVariable Integer id) {
         procedureService.delete(id);

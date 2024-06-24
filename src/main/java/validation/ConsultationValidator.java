@@ -21,7 +21,6 @@ public class ConsultationValidator {
         validateNotNull(consultationDTO.getConsultationDiagnostic(), "Diagnostic cannot be null or empty");
         validateNotNull(consultationDTO.getConsultationTreatment(), "Treatment cannot be null or empty");
 
-        System.out.println(consultationDTO.getOwnerPhone());
         registerAccountValidator.validatePhoneNumber(consultationDTO.getOwnerPhone());
         validateNotNull(consultationDTO.getOwnerAddress(), "Address cannot be null or empty");
 

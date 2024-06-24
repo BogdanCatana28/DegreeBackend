@@ -10,9 +10,6 @@ public class UserPreferenceDTOBuilder {
     public UserPreferenceDTOBuilder() {
     }
 
-    /**
-     * Simply name 'toEntity'
-     */
     public static UserPreference fromUserPreferenceDTO(UserPreferenceDTO preferenceDTO) {
         return UserPreference.builder()
                 .id(preferenceDTO.getId())
@@ -30,9 +27,6 @@ public class UserPreferenceDTOBuilder {
                 .build();
     }
 
-    /**
-     * Simply name 'toDTO'
-     */
     public static UserPreferenceDTO toUserPreferenceDTO(UserPreference preference) {
         return UserPreferenceDTO.builder()
                 .id(preference.getId())

@@ -20,7 +20,6 @@ public abstract class AccountValidator {
         }
     }
 
-
     public void validatePassword(String password) throws ValidatorException {
         if (password == null || password.isEmpty()) {
             throw new ValidatorException("Password cannot be empty");
@@ -57,5 +56,4 @@ public abstract class AccountValidator {
             throw new ValidatorException("Invalid phone number format");
         }
     }
-
 }

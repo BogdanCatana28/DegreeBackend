@@ -16,9 +16,6 @@ import java.util.Objects;
 
 
 public class UserDetailsImpl implements UserDetails {
-    /**
-     * You should extract this  constant in a separated class named 'Constants' in 'utils' package
-     */
     private static final long serialVersionUID = 1L;
 
     private Integer id;
@@ -83,9 +80,6 @@ public class UserDetailsImpl implements UserDetails {
         return authorities;
     }
 
-    /**
-     * Use getters and setters instead of writing manually
-     */
     public Integer getId() {
         return id;
     }

@@ -10,11 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/test")
 public class AccessController {
-    /**
-     * In controller methods you need to return a ResponseEntity<>, not a String
-     */
-
-
 
     @GetMapping("/all")
     public String allAccess() {
@@ -22,9 +17,7 @@ public class AccessController {
     }
 
     @GetMapping("/customer")
-    /**
-     * You could simply use @RolesAllowed({ "ROLE_CUSTOMER", "ROLE_MEDIC", "ROLE_ADMIN" })
-     */
+
     @PreAuthorize("hasRole('CUSTOMER') or hasRole('MEDIC') or hasRole('ADMIN')")
     public String userAccess() {
         return "User Content.";

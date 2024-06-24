@@ -14,9 +14,6 @@ public class PatientDTOBuilder {
     private PatientDTOBuilder() {
     }
 
-    /**
-     * Simply name 'toEntity'
-     */
     public static Patient fromPatientDTO(PatientDTO patientDTO) throws IllegalArgumentException {
         return Patient.builder()
                 .id(patientDTO.getId())
@@ -32,9 +29,6 @@ public class PatientDTOBuilder {
                 .build();
     }
 
-    /**
-     * Simply name 'toDTO'
-     */
     public static PatientDTO toPatientDTO(Patient patient) {
         PatientDTO patientDTO = PatientDTO.builder()
                 .id(patient.getId())

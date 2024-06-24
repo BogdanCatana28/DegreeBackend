@@ -28,9 +28,7 @@ public class UsersController {
     @PreAuthorize("hasRole('MEDIC')")
     public Iterable<UserDTO> getAllCustomers() {
         Iterable<User> users = userService.getAllCustomers();
-        /**
-         * You cannot call a builder method in a controller method. Do it in service !
-         */
+
         return UserDTOBuilder.toUserDTOList(users);
     }
 
@@ -47,14 +45,10 @@ public class UsersController {
     public ResponseEntity<String> uploadAvatar(@PathVariable Integer userId, @RequestParam("file") MultipartFile file) {
         try {
             userService.saveAvatar(userId, file);
-            /**
-             * You should extract this message as a constant in a separated class named 'Constants' in 'utils' package , as public static final
-             */
+
             return ResponseEntity.ok("Avatar uploaded successfully");
         } catch (Exception e) {
-            /**
-             * You should extract this message as a constant in a separated class named 'Constants' in 'utils' package , as public static final
-             */
+
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Failed to upload avatar: " + e.getMessage());
         }
@@ -65,9 +59,7 @@ public class UsersController {
     public ResponseEntity<String> update(@RequestBody ChangeAccountDetailsRequest accountData) {
         try {
             userService.updateAccountInformation(accountData);
-            /**
-             * You should extract this message as a constant in a separated class named 'Constants' in 'utils' package , as public static final
-             */
+
             return ResponseEntity.ok("Data updated successfully");
         } catch (ValidatorException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
@@ -79,15 +71,11 @@ public class UsersController {
     @GetMapping("/{id}/get-avatar")
     public ResponseEntity<byte[]> getAvatar(@PathVariable Integer id) {
         try {
-            /**
-             * Do not leave this logic to be made by controller. Do it in service
-             */
+
             byte[] avatar = userService.getAvatarByUserId(id);
 
             if (avatar == null || avatar.length == 0) {
-                /**
-                 * You should extract this message as a constant in a separated class named 'Constants' in 'utils' package , as public static final
-                 */
+
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User has no avatar");
             }
 
@@ -96,5 +84,4 @@ public class UsersController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
         }
     }
-
 }

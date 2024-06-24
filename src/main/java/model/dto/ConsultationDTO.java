@@ -13,23 +13,20 @@ import java.time.LocalDate;
 @Builder
 public class ConsultationDTO {
 
-    // consult
-    private int consultationId; //adaugat ptr consultDetails
-    private LocalDate consultationCreationDate; //adaugat ptr consultDetails
+    private int consultationId;
+    private LocalDate consultationCreationDate;
     private String consultationMainConcern;
     private String consultationHistoryOfConcern;
     private String consultationDiagnostic;
     private String consultationTreatment;
     private String consultationExtraNotes;
 
-    // owner
     private String ownerEmail;
     private String ownerFirstName;
     private String ownerLastName;
     private String ownerPhone;
     private String ownerAddress;
 
-    //patient
     private int patientId;
     private String patientName;
     private String patientSex;

@@ -14,9 +14,6 @@ import model.enums.PatientType;
 @NoArgsConstructor
 @Entity
 @Builder
-/** I think 'user_preferences' it's a better naming for the table,
- more info at the link: https://dev.to/ovid/database-naming-standards-2061
- */
 @Table(name = "userPreferences")
 public class UserPreference {
     @Id
@@ -25,12 +22,8 @@ public class UserPreference {
     private Integer id;
 
     @ManyToOne
-    /** You should also add @JoinColumn annotation which references the mapped column.
-     * @JoinColumn(name = "user_id")
-     */
     private User customer;
 
-    // OWNER
     @Column(name = "first_name")
     private String firstName;
 
@@ -46,7 +39,6 @@ public class UserPreference {
     @Column(name = "address")
     private String address;
 
-    // PATIENT
     @Column(name = "name")
     private String name;
 

@@ -26,16 +26,11 @@ public class UserPreferenceController {
     private UserPreferenceService userPreferenceService;
 
     @PostMapping()
-    /**
-     * You could simply use @RolesAllowed({ "ROLE_CUSTOMER", "ROLE_MEDIC", "ROLE_ADMIN" })
-     */
     @PreAuthorize("hasRole('MEDIC') OR hasRole('CUSTOMER') OR hasRole('ADMIN')")
     public ResponseEntity<UserPreferenceDTO> addUserPreference(@RequestBody UserPreferenceDTO preferenceDTO) {
         try {
             UserPreference preference = userPreferenceService.addUserPreference(preferenceDTO);
-            /**
-             * You cannot call a builder method in a controller method. Do it in service !
-             */
+
             UserPreferenceDTO preferenceDTOResponse = UserPreferenceDTOBuilder.toUserPreferenceDTO(preference);
             return ResponseEntity.ok(preferenceDTOResponse);
         } catch (ValidatorException | ServiceException e) {
@@ -50,9 +45,7 @@ public class UserPreferenceController {
     public ResponseEntity<UserPreferenceDTO> getUserPreferenceById(@PathVariable Integer id) {
         try {
             UserPreference preference = userPreferenceService.getUserPreferenceById(id);
-            /**
-             * You cannot call a builder method in a controller method. Do it in service !
-             */
+
             return ResponseEntity.ok(UserPreferenceDTOBuilder.toUserPreferenceDTO(preference));
         } catch (RepositoryException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
@@ -64,9 +57,7 @@ public class UserPreferenceController {
     public ResponseEntity<UserPreferenceDTO> updateUserPreference(@RequestBody UserPreferenceDTO userPreferenceDTO) {
         try {
             UserPreference preference = userPreferenceService.updateUserPreference(userPreferenceDTO);
-            /**
-             * You cannot call a builder method in a controller method. Do it in service !
-             */
+
             return ResponseEntity.ok(UserPreferenceDTOBuilder.toUserPreferenceDTO(preference));
         } catch (RepositoryException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
@@ -91,9 +82,7 @@ public class UserPreferenceController {
     @PreAuthorize("hasRole('MEDIC') OR hasRole('CUSTOMER') OR hasRole('ADMIN')")
     public ResponseEntity<Iterable<UserPreferenceDTO>> getUserPreferencesByUserId(@PathVariable Integer id) {
         Iterable<UserPreference> preferences = userPreferenceService.getUserPreferencesByUserId(id);
-        /**
-         * Do not leave this logic to be made by controller. Do it in service
-         */
+
         List<UserPreferenceDTO> preferenceDTOS = new ArrayList<>();
         preferences.forEach((preference) -> {
             preferenceDTOS.add(UserPreferenceDTOBuilder.toUserPreferenceDTO(preference));

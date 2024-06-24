@@ -22,9 +22,6 @@ import java.util.List;
 @RequestMapping("/appointments")
 public class AppointmentController {
 
-    /**
-     * You could also declare this autowired field as 'final'
-     */
     @Autowired
     private AppointmentService appointmentService;
 
@@ -38,7 +35,6 @@ public class AppointmentController {
         } catch (RepositoryException | ServiceException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
         }
-
     }
 
     @GetMapping
@@ -54,7 +50,6 @@ public class AppointmentController {
         } catch (RepositoryException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
         }
-
     }
 
     @GetMapping("/weekly")
@@ -68,5 +63,4 @@ public class AppointmentController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
         }
     }
-
 }

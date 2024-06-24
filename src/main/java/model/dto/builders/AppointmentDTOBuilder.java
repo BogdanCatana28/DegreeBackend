@@ -11,15 +11,10 @@ import model.enums.PatientSex;
 import model.enums.PatientType;
 
 public class AppointmentDTOBuilder {
-    /**
-     * Use @NoArgsContructor instead of this
-     */
+
     private AppointmentDTOBuilder() {
     }
 
-    /**
-     * Simply name 'toEntity'
-     */
     public static Appointment fromAppointmentDTO(AppointmentDTO appointmentDTO) {
         return Appointment.builder()
                 .dateAppointmentMade(LocalDateTime.now())
@@ -43,9 +38,6 @@ public class AppointmentDTOBuilder {
                 .build();
     }
 
-    /**
-     * Simply name 'toDTO'
-     */
     public static AppointmentDTO toAppointmentDTO(Appointment appointment) {
         return AppointmentDTO.builder()
                 .id(appointment.getId())

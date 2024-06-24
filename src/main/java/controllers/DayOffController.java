@@ -19,9 +19,7 @@ import java.time.LocalDate;
 @CrossOrigin
 @RequestMapping("/days-off")
 public class DayOffController {
-    /**
-     * You could also declare this autowired field as 'final'
-     */
+
     @Autowired
     private DayOffService dayOffService;
 
@@ -55,5 +53,4 @@ public class DayOffController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
         }
     }
-
 }

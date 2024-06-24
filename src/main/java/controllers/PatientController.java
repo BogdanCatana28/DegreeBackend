@@ -20,43 +20,27 @@ import java.util.Arrays;
 
 @RestController
 @CrossOrigin
-/**
- * You have to add 'patient' here in url and eliminate it from the below mappings
- */
 @RequestMapping("/")
 public class PatientController {
     @Autowired
     private PatientService patientService;
 
-    /**
-     * Remove 'patient' from url (see first comment)
-     */
     @GetMapping(value = "patient-types")
     public ResponseEntity<Iterable<String>> getPatientTypes() {
         return ResponseEntity.ok(Arrays.stream(PatientType.values()).map(PatientType::toString).toList());
     }
 
-    /**
-     * Remove 'patient' from url (see first comment)
-     */
     @GetMapping(value = "patient-sexes")
     public ResponseEntity<Iterable<String>> getPatientsSexes() {
         return ResponseEntity.ok(Arrays.stream(PatientSex.values()).map(PatientSex::toString).toList());
     }
 
-    /**
-     * Remove 'patients' from url (see first comment)
-     * Leave it empty
-     */
     @GetMapping("patients")
     @PreAuthorize("hasRole('MEDIC')")
     Iterable<PatientDTO> getPatients() {
         return PatientDTOBuilder.toPatientDTOList(patientService.getAllPatients());
     }
 
-    /**
-     * Remove 'patients' from url (see first comment)
-     */
     @GetMapping("patients/search")
     @PreAuthorize("hasRole('MEDIC')")
     Iterable<PatientDTO> searchPatients(@RequestParam String searchTerm) {
@@ -87,9 +71,6 @@ public class PatientController {
         return patientService.findDistinctColors();
     }
 
-    /**
-     * Remove 'patients' from url (see first comment)
-     */
     @PostMapping(value = "patients")
     @PreAuthorize("hasRole('MEDIC')")
     public ResponseEntity<PatientDTO> registerPatient(@RequestBody PatientDTO patientDTO) {
@@ -103,9 +84,6 @@ public class PatientController {
         }
     }
 
-    /**
-     * Remove 'patients' from url (see first comment)
-     */
     @GetMapping(value = "patients/{id}")
     @PreAuthorize("hasRole('MEDIC')")
     public ResponseEntity<PatientDTO> getPatient(@PathVariable Integer id) {
@@ -116,9 +94,6 @@ public class PatientController {
         }
     }
 
-    /**
-     * Remove 'patient' from url (see first comment)
-     */
     @GetMapping("patient-exists")
     @PreAuthorize("hasRole('MEDIC')")
     public ResponseEntity<PatientExistsResponse> checkIfPatientExists(
@@ -140,5 +115,4 @@ public class PatientController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
         }
     }
-
 }

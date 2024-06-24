@@ -26,6 +26,5 @@ public class PatientDTO {
     private String patientMedicalHistoryBeforeClinic;
     private UserDTO owner;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    /** You could also use @NotNUll constraint from javax.validation.constraints **/
     private Boolean userAlreadyRegistered;
 }

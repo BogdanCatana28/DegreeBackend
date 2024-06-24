@@ -4,15 +4,12 @@ import java.util.List;
 
 public class JwtResponse {
     private String token;
-    /** If its value cannot be changed once it has been initialized, you should add the 'final' keyword  **/
     private String type = "Bearer";
     private String refreshToken;
     private Integer id;
     private String email;
     private List<String> roles;
 
-    /** Instead of manually write constructors, getters and setters for all variables, use @Getter, @Setter, @AllArgsContructor annotations
-     */
     public JwtResponse(String accessToken, String refreshToken, Integer id, String email, List<String> roles) {
         this.token = accessToken;
         this.refreshToken = refreshToken;

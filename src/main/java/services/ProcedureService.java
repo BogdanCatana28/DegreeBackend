@@ -16,5 +16,4 @@ public interface ProcedureService {
     Procedure updateProcedure(Procedure newProcedure, Integer id) throws RepositoryException;
 
     void delete(Integer id);
-
 }

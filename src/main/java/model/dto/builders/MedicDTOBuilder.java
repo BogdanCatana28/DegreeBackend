@@ -7,15 +7,10 @@ import model.dto.MedicDTO;
 import java.util.ArrayList;
 
 public class MedicDTOBuilder {
-    /**
-     * Use @NoArgsContructor instead of this
-     */
+
     private MedicDTOBuilder() {
     }
 
-    /**
-     * Simply name 'toDTO'
-     */
     public static MedicDTO toMedicDTO(Medic medic) {
         return MedicDTO.builder()
                 .id(medic.getId())
@@ -28,7 +23,6 @@ public class MedicDTOBuilder {
                 .specializations(medic.getSpecializations())
                 .build();
     }
-
 
     public static Iterable<MedicDTO> toMedicDTOList(Iterable<Medic> medics) {
         ArrayList<MedicDTO> medicDTOS = new ArrayList<>();

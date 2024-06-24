@@ -18,7 +18,6 @@ public class AccountRequestValidator {
         validatePassword(data.getCurrentPassword());
     }
 
-    // if received data is null, ignore it
     private boolean validateNotNull(Object value) {
         return value != null;
     }
@@ -56,7 +55,6 @@ public class AccountRequestValidator {
                 throw new ValidatorException("Invalid email format");
             }
         }
-
     }
     
     private void validateName(String name) throws ValidatorException {
@@ -67,5 +65,4 @@ public class AccountRequestValidator {
         }
 
     }
-
 }

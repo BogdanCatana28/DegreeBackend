@@ -8,14 +8,10 @@ import model.dto.ConsultationDTO;
 import java.util.ArrayList;
 
 public class ConsultationDTOBuilder {
-    /**
-     * Use @NoArgsContructor instead of this
-     */
+
     private ConsultationDTOBuilder() {
     }
-    /**
-     * Simply name 'toEntity'
-     */
+
     public static Consultation fromConsultationDTO(ConsultationDTO consultationDTO) {
         return Consultation.builder()
                 .mainConcern(consultationDTO.getConsultationMainConcern())
@@ -27,9 +23,6 @@ public class ConsultationDTOBuilder {
                 .build();
     }
 
-    /**
-     * Simply name 'toDTO'
-     */
     public static ConsultationDTO toConsultationDTO(Consultation consultation) {
         return ConsultationDTO.builder()
                 .consultationMainConcern(consultation.getMainConcern())
@@ -55,7 +48,6 @@ public class ConsultationDTOBuilder {
                 .consultationCreationDate(consultation.getCreationDate())
                 .build();
     }
-
 
     public static Iterable<ConsultationDTO> toConsultationDTOList(Iterable<Consultation> consultations) {
         ArrayList<ConsultationDTO> consultationDTOS = new ArrayList<>();

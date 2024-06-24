@@ -14,26 +14,15 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @CrossOrigin
-/**
- * You have to add 'medics' here in url and eliminate it from the below mappings
- */
-@RequestMapping("/")
+@RequestMapping("/medics")
 public class MedicController {
-    /**
-     * You could also declare this autowired field as 'final'
-     */
+
     @Autowired
     private MedicService medicService;
 
-    /**
-     * Remove 'medics' from url (see first comment)
-     */
-    @GetMapping("medics")
+    @GetMapping()
     public ResponseEntity<Iterable<MedicDTO>> getAllMedicsForProcedure(@RequestParam(required = false) Integer procedureId) {
-        /**
-         * Move this verification in service method
-         * A controller only call service methods
-         */
+
         if (procedureId != null) {
             try {
                 return ResponseEntity.ok(MedicDTOBuilder.toMedicDTOList(medicService.getMedicsForProcedure(procedureId)));
@@ -44,10 +33,7 @@ public class MedicController {
         return ResponseEntity.ok(MedicDTOBuilder.toMedicDTOList(medicService.getAllMedics()));
     }
 
-    /**
-     * Remove 'medics' from url (see first comment)
-     */
-    @GetMapping("/medics/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<MedicDTO> showMedicById(@PathVariable Integer id) {
         try {
             return ResponseEntity.ok().body(MedicDTOBuilder.toMedicDTO(medicService.getMedicById(id)));
@@ -56,16 +42,10 @@ public class MedicController {
         }
     }
 
-    /**
-     * Remove 'medics' from url (see first comment)
-     */
-    @GetMapping("medics/adminList")
+    @GetMapping("/adminList")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Iterable<MedicDTO>> getAllMedicsForAdmin(@RequestParam(required = false) Integer procedureId) {
-        /**
-         * Move this verification in service method
-         * A controller only call service methods
-         */
+
         if (procedureId != null) {
             try {
                 return ResponseEntity.ok(MedicDTOBuilder.toMedicDTOList(medicService.getMedicsForProcedure(procedureId)));
@@ -76,10 +56,7 @@ public class MedicController {
         return ResponseEntity.ok(MedicDTOBuilder.toMedicDTOList(medicService.getAllMedics()));
     }
 
-    /**
-     * Remove 'medics' from url (see first comment)
-     */
-    @GetMapping("/medics/adminList/{id}")
+    @GetMapping("/adminList/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<MedicDTO> showMedicByIdForAdmin(@PathVariable Integer id) {
         try {

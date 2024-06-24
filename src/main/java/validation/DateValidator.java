@@ -22,20 +22,4 @@ public class DateValidator {
             throw new ValidatorException("Date cannot be in the past");
         }
     }
-
-    public static void validateBeforeEndOfNextWeek(LocalDate date) throws ValidatorException {
-        if (date.isAfter(getEndOfCurrentWeekDate(LocalDate.now())) || date.isEqual(getEndOfCurrentWeekDate(LocalDate.now()))) {
-            throw new ValidatorException("Date cannot be later than the end of this week");
-        }
-    }
-
-    public static void validateAfterEndOfNextWeek(LocalDate date) throws ValidatorException {
-        if (date.isBefore(getEndOfCurrentWeekDate(LocalDate.now())) || date.isEqual(getEndOfCurrentWeekDate(LocalDate.now()))) {
-            throw new ValidatorException("Date cannot be sooner than the end of this week");
-        }
-    }
-
-    private static LocalDate getEndOfCurrentWeekDate(LocalDate date) {
-        return date.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
-    }
 }

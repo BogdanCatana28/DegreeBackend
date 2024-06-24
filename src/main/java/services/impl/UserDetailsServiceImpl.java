@@ -12,9 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-    /**
-     * You could also declare this autowired fields as 'private final'
-     */
     @Autowired
     UserRepository userRepository;
 
@@ -25,5 +22,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         return UserDetailsImpl.build(user);
     }
-
 }

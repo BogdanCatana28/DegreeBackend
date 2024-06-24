@@ -16,16 +16,14 @@ public class AppointmentDTO {
     private LocalDateTime dateReservation;
     private Integer procedureId;
     private Integer medicId;
-    private String extraNotes; // any extra notes a customer might have
+    private String extraNotes;
 
-    // OWNER
     private String ownerFirstName;
     private String ownerLastName;
     private String ownerAddress;
     private String ownerEmail;
     private String ownerPhone;
 
-    // PATIENT
     private String patientName;
     private String patientSex;
     private String patientType;

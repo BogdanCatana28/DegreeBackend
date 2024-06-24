@@ -27,9 +27,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-    /**
-     * You could also declare this autowired field as 'final'
-     */
+
     @Autowired
     private AccountsService accountsService;
 
@@ -75,15 +73,10 @@ public class AuthController {
 
     @PostMapping("/reset-password")
     public ResponseEntity<String> resetPassword(@RequestBody Map<String, String> requestBody) {
-        /**
-         * Leave this extraction for service methods
-         * A controller only call service methods
-         */
+
         String token = requestBody.get("token");
         String password = requestBody.get("password");
 
-
-        // If the token is valid, reset the user's password and remove the token from the database
         boolean isPasswordReset = false;
         try {
             isPasswordReset = accountsService.resetPasswordWithToken(token, password);
@@ -92,14 +85,10 @@ public class AuthController {
         }
 
         if (isPasswordReset) {
-            /**
-             * You should extract this message as a constant in a separated class named 'Constants' in 'utils' package , as public static final
-             */
+
             return ResponseEntity.ok("Password reset successful.");
         } else {
-            /**
-             * You should extract this message as a constant in a separated class named 'Constants' in 'utils' package , as public static final
-             */
+
             return ResponseEntity.badRequest().body("Password reset failed.");
         }
     }
@@ -107,19 +96,12 @@ public class AuthController {
     @PermitAll
     @PostMapping("/generate-password-reset-token")
     public ResponseEntity<?> generatePasswordResetToken(@RequestBody Map<String, String> requestBody) {
-        /**
-         * Leave this extraction for service methods
-         * A controller only call service methods
-         */
+
         String email = requestBody.get("email");
         String token = accountsService.generatePasswordResetToken(email);
-        /**
-         * You should extract this message as a constant in a separated class named 'Constants' in 'utils' package , as public static final
-         */
+
         return ResponseEntity.ok("Password reset token generated successfully.");
     }
-
-
 
     @PostMapping("/sign-out")
     public ResponseEntity<?> logoutUser() {
