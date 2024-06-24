@@ -24,10 +24,11 @@ public interface AppointmentService {
 
     Set<LocalTime> getAvailableSlotsForMedic(Integer medicId, Integer procedureId, LocalDate date) throws RepositoryException;
 
-
     Map<LocalTime, Set<AppointmentMedicDTO>> getAvailableSlotsForProcedure(Integer procedureId, LocalDate date) throws RepositoryException;
 
     List<AppointmentDTO> getAppointmentsForWeekContainingDate(Integer medicId, LocalDate date) throws ServiceException;
 
     void deleteAppointment(Appointment appointment);
+
+    Appointment getAppointmentById(Integer appointmentId) throws RepositoryException;
 }

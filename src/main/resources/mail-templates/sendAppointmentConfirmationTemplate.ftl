@@ -10,6 +10,10 @@
     which will last approximately <strong>${duration}</strong> minutes,
     on <strong>${appointmentDate}</strong> was successfully confirmed.<br/>
 </p>
+<p>
+    If you wish to cancel this appointment, please visit the following link:<br/>
+    <a href="${cancelLink}">${cancelLink}</a>
+</p>
 <p>Regards,</p>
 <p>
     <em>${senderName}</em> <br/>

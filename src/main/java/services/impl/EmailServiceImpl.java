@@ -66,14 +66,16 @@ public class EmailServiceImpl implements EmailService {
         templateModel.put("duration", appointment.getProcedure().getDuration());
         templateModel.put("senderName", senderName);
         templateModel.put("logo", logo);
+        String cancelLink = "http://localhost:3000/cancel-appointment/" + appointment.getId();
+        templateModel.put("cancelLink", cancelLink);
 
         try {
-
             sendEmailWithTemplate(appointment.getOwnerEmail(), "Appointment confirmation", templateModel, "sendAppointmentConfirmationTemplate.ftl");
         } catch (IOException | MessagingException | TemplateException e) {
             throw new RuntimeException(e);
         }
     }
+
 
     @Override
     public void sendAppointmentCancellation(Appointment appointment) {

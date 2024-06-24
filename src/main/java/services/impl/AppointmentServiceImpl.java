@@ -53,7 +53,6 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointment.setProcedure(procedureService.getProcedureById(appointmentDTO.getProcedureId()));
 
         if (appointment.getMedic() == null || appointment.getProcedure() == null) {
-
             throw new ServiceException("Medic or appointment id null");
         }
 
@@ -67,13 +66,10 @@ public class AppointmentServiceImpl implements AppointmentService {
     public Iterable<Appointment> getMedicAppointmentsForDay(Integer medicId, LocalDate day) {
         LocalDateTime date = LocalDateTime.of(day, LocalTime.of(0, 0, 0));
         return appointmentRepository.getAppointmentByMedicIdAndDateReservationBetween(medicId, date, date.plusDays(1));
-
     }
 
     @Override
-
     public Iterable<Appointment> getAppointmentsByProcedureId(Integer procedureId, LocalDateTime startDate, LocalDateTime endDate) throws RepositoryException {
-
         Procedure procedure = procedureService.getProcedureById(procedureId);
         List<MedicSpecialization> procedureSpecializations = procedure.getSpecializations();
 
@@ -88,12 +84,10 @@ public class AppointmentServiceImpl implements AppointmentService {
         for (var med : medics) {
             appointments.addAll((Collection<? extends Appointment>) appointmentRepository.getAppointmentByMedicIdAndDateReservationBetween(
                     med.getId(), startDate, endDate));
-
         }
 
         return appointments;
     }
-
 
     @Override
     public Set<LocalTime> getAvailableSlotsForMedic(Integer medicId, Integer procedureId, LocalDate date) throws RepositoryException {
@@ -106,7 +100,6 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         for (var shift : shifts) {
             for (LocalDateTime time = shift.getStartTime(); time.isBefore(shift.getEndTime()); time = time.plusMinutes(10)) {
-
                 if (isMedicAvailable(med.getId(), time, time.plusMinutes(duration), shift)) {
                     availableSlots.add(time.toLocalTime());
                 }
@@ -117,9 +110,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public Map<LocalTime, Set<AppointmentMedicDTO>> getAvailableSlotsForProcedure(Integer procedureId, LocalDate date) throws RepositoryException {
-
         Procedure procedure = procedureService.getProcedureById(procedureId);
-
         List<MedicSpecialization> procedureSpecializations = procedure.getSpecializations();
 
         Set<Medic> medics = new HashSet<>();
@@ -179,7 +170,6 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     public List<AppointmentDTO> getAppointmentsForWeekContainingDate(Integer medicId, LocalDate date) {
-
         List<Appointment> appointments = appointmentRepository.findByMedicId(medicId);
         List<AppointmentDTO> allAppointments = appointments.stream()
                 .map(AppointmentDTOBuilder::toAppointmentDTO)
@@ -201,7 +191,12 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public void deleteAppointment(Appointment appointment) {
-
         appointmentRepository.delete(appointment);
+    }
+
+    @Override
+    public Appointment getAppointmentById(Integer appointmentId) throws RepositoryException {
+        return appointmentRepository.findById(appointmentId)
+                .orElseThrow(() -> new RepositoryException("Appointment not found"));
     }
 }

@@ -63,4 +63,16 @@ public class AppointmentController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
         }
     }
+
+    @PostMapping("/cancel-appointment/{appointmentId}")
+    public ResponseEntity<?> cancelAppointment(@PathVariable Integer appointmentId) {
+        try {
+            Appointment appointment = appointmentService.getAppointmentById(appointmentId);
+            appointmentService.deleteAppointment(appointment);
+            return ResponseEntity.ok().body("Appointment cancelled successfully.");
+        } catch (RepositoryException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
+        }
+    }
 }
+
