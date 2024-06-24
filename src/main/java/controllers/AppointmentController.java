@@ -19,13 +19,13 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/appointments")
+@RequestMapping()
 public class AppointmentController {
 
     @Autowired
     private AppointmentService appointmentService;
 
-    @PostMapping()
+    @PostMapping("/appointments")
     public ResponseEntity<AppointmentDTO> addAppointment(@RequestBody AppointmentDTO appointmentDTO) {
         try {
             Appointment newAppointment = appointmentService.addAppointment(appointmentDTO);
@@ -37,7 +37,7 @@ public class AppointmentController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/appointments")
     public ResponseEntity<?> getAvailableSlots(@RequestParam(value = "medicId", required = false) Integer medicId,
                                                @RequestParam(value = "procedureId") Integer procedureId,
                                                @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
@@ -52,7 +52,7 @@ public class AppointmentController {
         }
     }
 
-    @GetMapping("/weekly")
+    @GetMapping("/appointments/weekly")
     public ResponseEntity<Iterable<AppointmentDTO>> getAppointmentsForWeekContainingDate(
             @RequestParam("medicId") Integer medicId,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
@@ -64,7 +64,7 @@ public class AppointmentController {
         }
     }
 
-    @PostMapping("/cancel-appointment/{appointmentId}")
+    @PostMapping("/api/appointments/cancel-appointment/{appointmentId}")
     public ResponseEntity<?> cancelAppointment(@PathVariable Integer appointmentId) {
         try {
             Appointment appointment = appointmentService.getAppointmentById(appointmentId);
