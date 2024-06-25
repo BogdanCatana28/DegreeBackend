@@ -67,6 +67,12 @@ public class ConsultationServiceImpl implements ConsultationService {
         Supplier<RepositoryException> exception = () -> new RepositoryException("Consultation not found");
         return consultationRepository.findById(consultationId).orElseThrow(exception);
     }
+
+    @Override
+    public List<ConsultationDTO> getConsultationsByOwnerId(Integer ownerId) {
+        List<Consultation> consultations = consultationRepository.findAllByOwnerId(ownerId);
+        return (List<ConsultationDTO>) ConsultationDTOBuilder.toConsultationDTOList(consultations);
+    }
 }
 
 

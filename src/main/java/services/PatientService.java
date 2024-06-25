@@ -33,4 +33,7 @@ public interface PatientService {
     Iterable<String> findDistinctColors();
 
     Patient checkIfPatientExists(String patientName, PatientType patientType, String patientBreed, PatientSex patientSex, String ownerEmail);
+
+    Iterable<Patient> getPatientsByOwnerId(Integer ownerId) throws RepositoryException;
+
 }

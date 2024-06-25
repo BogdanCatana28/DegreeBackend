@@ -13,5 +13,7 @@ public interface ConsultationService {
     List<ConsultationDTO> getConsultationsByPatientId(Integer patientId);
 
     Consultation getConsultationById(Integer consultationId) throws RepositoryException;
+
+    List<ConsultationDTO> getConsultationsByOwnerId(Integer ownerId);
 }
 

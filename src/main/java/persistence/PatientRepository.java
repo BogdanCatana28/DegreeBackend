@@ -44,4 +44,7 @@ public interface PatientRepository extends JpaRepository<Patient, Integer> {
     List<Patient> findByBirthDateBetween(LocalDate startDate, LocalDate endDate);
 
     List<Patient> findByWeightBetween(Float minWeight, Float maxWeight);
+
+    Iterable<Patient> findAllByOwnerId(Integer ownerId);
+
 }

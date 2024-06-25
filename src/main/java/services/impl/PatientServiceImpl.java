@@ -116,4 +116,15 @@ public class PatientServiceImpl implements PatientService {
         return patientRepository.findByNameAndTypeAndBreedAndSexAndOwner_Email(
                 patientName, patientType, patientBreed, patientSex, ownerEmail);
     }
+
+
+    @Override
+    public Iterable<Patient> getPatientsByOwnerId(Integer ownerId) throws RepositoryException {
+        User owner = userService.getUserById(ownerId);
+        if (owner == null) {
+            throw new RepositoryException("Owner not found");
+        }
+        return patientRepository.findAllByOwnerId(ownerId);
+    }
+
 }

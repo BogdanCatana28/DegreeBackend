@@ -12,5 +12,6 @@ public interface ConsultationRepository extends JpaRepository<Consultation, Inte
 
     List<Consultation> findAllByPatientId(Integer patientId);
 
+    List<Consultation> findAllByOwnerId(Integer ownerId);
 }
 

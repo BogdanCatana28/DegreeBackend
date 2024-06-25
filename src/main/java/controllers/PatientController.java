@@ -115,4 +115,15 @@ public class PatientController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
         }
     }
+
+    @GetMapping("patients/by-owner/{ownerId}")
+    @PreAuthorize("hasRole('CUSTOMER')")
+    public ResponseEntity<Iterable<PatientDTO>> getPatientsByOwnerId(@PathVariable Integer ownerId) {
+        try {
+            return ResponseEntity.ok(PatientDTOBuilder.toPatientDTOList(patientService.getPatientsByOwnerId(ownerId)));
+        } catch (RepositoryException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
+        }
+    }
+
 }

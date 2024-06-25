@@ -44,6 +44,14 @@ public class ConsultationController {
         List<ConsultationDTO> consultations = consultationService.getConsultationsByPatientId(patientId);
         return ResponseEntity.ok(consultations);
     }
+
+    @PreAuthorize("hasRole('CUSTOMER')")
+    @GetMapping("/by-owner/{ownerId}")
+    public ResponseEntity<List<ConsultationDTO>> getConsultationsByOwnerId(@PathVariable Integer ownerId) {
+        List<ConsultationDTO> consultations = consultationService.getConsultationsByOwnerId(ownerId);
+        return ResponseEntity.ok(consultations);
+    }
+
     @PreAuthorize("hasRole('MEDIC')")
     @GetMapping("/{consultationId}")
     public ResponseEntity<ConsultationDTO> getConsultation(@PathVariable Integer consultationId) {
