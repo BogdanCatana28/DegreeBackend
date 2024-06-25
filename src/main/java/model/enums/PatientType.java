@@ -3,18 +3,15 @@ package model.enums;
 public enum PatientType {
     DOG,
     CAT,
-    HORSE,
-    COW,
-    PIG,
     BIRD,
     REPTILE,
     AMPHIBIAN,
     FISH,
     RODENT,
-    OTHER;
+    EXOTIC_MAMMAL;
 
     @Override
     public String toString() {
-        return this.name().charAt(0) + this.name().substring(1).toLowerCase();
+        return this.name().charAt(0) + this.name().substring(1).toLowerCase().replace('_', ' ');
     }
 }

@@ -5,5 +5,10 @@ public enum MedicSpecialization {
     PATHOLOGIST,
     ANESTHESIOLOGY,
     DENTISTRY,
-    SURGERY
+    SURGERY,
+    DERMATOLOGY,
+    EMERGENCY_AND_CRITICAL_CARE,
+    GROOMING,
+    NUTRITION,
+    VACCINOLOGY
 }
