@@ -20,6 +20,12 @@ public class ChatbotController {
     public ResponseEntity<Map<String, String>> chat(@RequestBody Map<String, String> payload) {
         String userMessage = payload.get("message");
 
+        if (!isVeterinaryRelated(userMessage)) {
+            Map<String, String> response = new HashMap<>();
+            response.put("response", "I'm sorry, but I can only assist you with questions related to veterinary medicine.");
+            return ResponseEntity.ok(response);
+        }
+
         RestTemplate restTemplate = new RestTemplate();
         String openaiUrl = "https://api.openai.com/v1/chat/completions";
 
@@ -81,5 +87,19 @@ public class ChatbotController {
             }
         }
         return false;
+    }
+
+    private boolean isVeterinaryRelated(String userMessage) {
+        String lowerCaseMessage = userMessage.toLowerCase();
+        String[] veterinaryKeywords = {
+                "teeth", "dental", "breath", "caries", "gum", "tartar", "plaque",
+                "broken", "leg", "fissure", "fracture", "surgery", "orthopedic", "ligament",
+                "vaccine", "vaccination", "needle", "syringe", "immunization", "shots",
+                "blood", "check-up", "regular", "tests", "examination", "health", "wellness",
+                "groom", "bath", "fur", "haircut",
+                "emergency", "urgent", "critical",
+                "diet", "food", "nutrition", "weight"
+        };
+        return containsAny(lowerCaseMessage, veterinaryKeywords);
     }
 }
