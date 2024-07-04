@@ -84,8 +84,6 @@ public class AuthenticationService implements AccountsService {
         User user = AuthenticationDTOBuilder.fromSignupRequest(signUpRequest);
         user.setPassword(encoder.encode(signUpRequest.getPassword()));
 
-        userRepository.save(user);
-
         return userRepository.save(user);
     }
 
